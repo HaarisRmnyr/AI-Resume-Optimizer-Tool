@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -6,6 +6,15 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+
+ useEffect(() => {
+  fetch('http://localhost:8080/api/connect')
+    .then(res => res.text()) // <-- Changed from .json() to .text()
+    .then(data => {
+      console.log("Backend response:", data);
+    })
+    .catch(err => console.error("Connection failed:", err));
+}, []);
 
   return (
     <>
